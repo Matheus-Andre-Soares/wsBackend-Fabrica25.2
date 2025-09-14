@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Despesas</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Lista de Despesas</h1>
+        <nav>
+            <a href="{% url 'despesa_create' %}">Nova Despesa</a>
+            <a href="{% url 'index' %}">Página Inicial</a>
+        </nav>
+    </div>
+    <div class="container">
+        <form method="get" action="{% url 'despesa_list' %}">
+            <label for="moeda">Converter para:</label>
+            <input type="text" id="moeda" name="moeda" value="{{ moeda }}" />
+            <button type="submit">Converter</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Categoria</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for despesa in despesas %}
+                    <tr>
+                        <td>{{ despesa.descricao }}</td>
+                        <td>{{ despesa.valor_convertido|floatformat:2 }} {{ moeda }}</td>
+                        <td>{{ despesa.categoria }}</td>
+                        <td>{{ despesa.data }}</td>
+                        <td>
+                            <a href="{% url 'despesa_update' despesa.pk %}">Editar</a>
+                            <a href="{% url 'despesa_delete' despesa.pk %}">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% load static custom_filters %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Exclusão de Despesa</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Confirmar Exclusão de Despesa</h1>
+        <nav>
+            <a href="{% url 'despesa_list' %}">Voltar à Lista de Despesas</a>
+            <a href="{% url 'index' %}">Página Inicial</a>
+        </nav>
+    </div>
+    <div class="container">
+        <p>Tem certeza de que deseja excluir a despesa "{{ despesa.descricao }}" no valor de {{ despesa.valor }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirmar Exclusão</button>
+        </form>
+        <a href="{% url 'despesa_list' %}">Cancelar</a>
+    </div>
+</body>
+</html>

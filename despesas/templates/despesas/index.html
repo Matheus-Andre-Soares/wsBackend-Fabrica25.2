@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Gastos Pessoais</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Registro de Gastos Pessoais</h1>
+        <nav>
+            <a href="{% url 'categoria_list' %}">Categorias</a>
+            <a href="{% url 'despesa_list' %}">Despesas</a>
+            <a href="{% url 'importar_taxas' %}">Importar Taxas de Câmbio</a>
+        </nav>
+    </div>
+    <div class="container">
+        <h2>Bem-vindo ao seu Registro de Gastos Pessoais</h2>
+        <p>Use o menu acima para navegar pelas categorias e despesas, ou importar dados de APIs externas.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if despesa %}Editar Despesa{% else %}Nova Despesa{% endif %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>{% if despesa %}Editar Despesa{% else %}Nova Despesa{% endif %}</h1>
+        <nav>
+            <a href="{% url 'despesa_list' %}">Voltar à Lista de Despesas</a>
+            <a href="{% url 'index' %}">Página Inicial</a>
+        </nav>
+    </div>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div>
+                <label for="id_descricao">Descrição:</label>
+                {{ form.descricao }}
+            </div>
+            <div>
+                <label for="id_valor">Valor:</label>
+                {{ form.valor }} USD
+                {% if form.valor.errors %}
+                    <div class="error">{{ form.valor.errors }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="id_categoria">Categoria:</label>
+                {{ form.categoria }}
+            </div>
+            <div>
+                <label for="id_data">Data:</label>
+                {{ form.data }}
+            </div>
+            <button type="submit">{% if despesa %}Atualizar{% else %}Criar{% endif %}</button>
+        </form>
+    </div>
+</body>
+</html>

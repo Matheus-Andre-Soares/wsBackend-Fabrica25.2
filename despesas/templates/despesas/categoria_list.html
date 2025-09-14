@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Categorias</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Lista de Categorias</h1>
+        <nav>
+            <a href="{% url 'categoria_create' %}">Nova Categoria</a>
+            <a href="{% url 'index' %}">Voltar</a>
+        </nav>
+    </div>
+    <div class="container">
+        <ul>
+            {% for categoria in categorias %}
+                <li>{{ categoria.nome }} - 
+                    <a href="{% url 'categoria_update' categoria.pk %}">Editar</a> - 
+                    <a href="{% url 'categoria_delete' categoria.pk %}">Excluir</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
