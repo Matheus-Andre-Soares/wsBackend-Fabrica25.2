@@ -85,12 +85,19 @@ def importar_taxas(request):
         taxas = dados.get('rates', {})
         data_atual = timezone.now().date()
 
-        for moeda, taxa in taxas.items():
-            TaxaDeCambio.objects.update_or_create(
-                moeda=moeda,
-                data=data_atual,
-                defaults={'taxa': taxa}
-            )
+        from decimal import Decimal, InvalidOperation
+
+    for moeda, taxa in taxas.items():
+        try:
+            valor_decimal = Decimal(str(taxa).replace(',', '.'))
+        except (InvalidOperation, TypeError, ValueError):
+            valor_decimal = Decimal('0')  # ou pule essa moeda: continue
+
+        TaxaDeCambio.objects.update_or_create(
+            moeda=moeda,
+            data=data_atual,
+            defaults={'taxa': valor_decimal}
+        )
 
         return JsonResponse({'status': 'success'})
     else:
