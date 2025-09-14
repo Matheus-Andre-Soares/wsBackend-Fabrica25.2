@@ -8,6 +8,7 @@ Este é um projeto Django para o registro e consulta de despesas pessoais, com s
 - Categorias: Organize suas despesas em diferentes categorias.
 - Conversão de Moeda: Converta o valor das despesas para diferentes moedas usando uma API de taxas de câmbio.
 - Importação de Taxas de Câmbio: Atualize as taxas de câmbio automaticamente a partir de uma API.
+- Compatibilidade com Docker: É possível rodar o projeto em containers para desenvolvimento isolado.
 
 ## Instalação
 
@@ -16,8 +17,9 @@ Este é um projeto Django para o registro e consulta de despesas pessoais, com s
 - Python 3.8 ou superior
 - Django 5.1 ou superior
 - Requests (biblioteca para fazer requisições HTTP)
+- Docker e Docker Compose (opcional, para rodar em containers)
 
-### Passo a Passo
+### Passo a Passo (sem docker)
 
 ```bash
 1. Clone o repositório:
@@ -39,7 +41,22 @@ python manage.py runserver
 
 6. Acesse o projeto no seu navegador em `http://127.0.0.1:8000/`.
 ```
+### Passo a Passo (com docker)
 
+```bash
+1. Clone o repositório (se ainda não o fez):
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+
+2. Certifique-se de que o Docker e Docker Compose estão instalados:
+docker --version
+docker compose version
+
+3. Construa e inicie o container:
+docker compose up --build
+
+4. O Django será executado dentro do container e ficará disponível em: 'http://localhost:8000/'
+```
 ## Estrutura do Projeto
 
 - `models.py`: Contém as definições dos modelos `Categoria`, `Despesa` e `TaxaDeCambio`.
